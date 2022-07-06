@@ -1,0 +1,20 @@
+!!! 5
+%html
+  %head
+    %title= 'Thedigibank'
+
+    = csrf_meta_tag
+    = csp_meta_tag
+    = stylesheet_link_tag 'application'
+    = javascript_pack_tag 'application'
+
+  %body.app
+    .container
+      %p.notice
+        = notice
+      %p.alert
+        = alert
+      = button_to "Sign Out", destroy_user_session_path, method: :delete
+
+      = yield
+
