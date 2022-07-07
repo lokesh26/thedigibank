@@ -1,7 +1,10 @@
 class Account < ApplicationRecord
   belongs_to :user
 
-  validates :user_id, presence: true
-  validates :account_number, presence: true, uniqueness:  {case_sensitive: true}
-  validates :balance, presence: true, numericality: { greater_than_or_equal_to: 0}  
+  has_many :sent_transactions, :class_name => 'Transaction', :foreign_key => 'sender_id'
+  has_many :received_transactions, :class_name => 'Transaction', :foreign_key => 'receiver_id'
+
+  validates :user_id, presence: true, uniqueness: true
+  validates :account_number, presence: true, uniqueness:  { case_sensitive: true }
+  validates :balance, presence: true, numericality: { greater_than_or_equal_to: 0 }  
 end
