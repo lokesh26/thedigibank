@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_06_142836) do
+ActiveRecord::Schema.define(version: 2022_07_07_050109) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 2022_07_06_142836) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.decimal "amount", precision: 10
+    t.string "transaction_uuid"
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["receiver_id"], name: "index_transactions_on_receiver_id"
+    t.index ["sender_id"], name: "index_transactions_on_sender_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -35,4 +46,6 @@ ActiveRecord::Schema.define(version: 2022_07_06_142836) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "transactions", "accounts", column: "receiver_id"
+  add_foreign_key "transactions", "accounts", column: "sender_id"
 end
