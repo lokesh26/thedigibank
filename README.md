@@ -66,7 +66,7 @@ bundle exec rspec <path/to/spec/file>:<line number of test>
 
 ### Transaction Safety
 
-- Devise for Authenticatio
+- Devise for Authentication
 
 - Safe routing
 
@@ -76,7 +76,11 @@ bundle exec rspec <path/to/spec/file>:<line number of test>
 
 ### Future Extensions
 
-- Front end Validations
+- Devise lockable to lock after account after certain login attempts
+
+- Logout session after a few minutes
+
+- Front end Validations and UI improvements
 
 - Controller Specs
 
