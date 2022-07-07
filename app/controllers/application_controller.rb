@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
-	before_action :set_cache_headers
+	before_action :set_cache_headers ,:set_current_account!
 	layout :choose_layout
+
+  def set_current_account!
+    logger.debug { 'set_current_account!' }
+    @account ||= current_user.account
+  end  
 
   private
 

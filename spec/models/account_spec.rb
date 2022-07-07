@@ -6,7 +6,7 @@ describe Account do
 
   describe 'associations' do
     it { is_expected.to(belong_to(:user)) }
-    it { is_expected.to have_many(:sent_transactions) }
+    it { is_expected.to have_many(:transactions) }
     it { is_expected.to have_many(:received_transactions) }
   end
 

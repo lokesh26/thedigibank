@@ -1,0 +1,18 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.navbar-light.bg-light.mt-1
+  %a.navbar-brand.px-2{ href: root_path }
+    TheDigiBank
+  %button.navbar-toggler{ 'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbar-nav-dropdown', 'data-toggle' => 'collapse', :type => 'button' }
+  .collapse.navbar-collapse.justify-content-between#navbar-nav-dropdown
+    %ul.nav.navbar-nav
+      %li.nav-item
+        = link_to 'Dashboard', root_path, class: 'nav-link'
+      %li.nav-item
+        = link_to 'New Transaction', new_accounts_transaction_path, class: 'nav-link'
+      %li.nav-item
+        = link_to 'All Transactions', root_path, class: 'nav-link'
+    %ul.nav.navbar-nav.navbar-right
+      %li.nav-item
+        = link_to "Hi, #{current_user.name}", root_path, class: 'nav-link'
+      %li.nav-item.px-2
+        = button_to('Log out', destroy_user_session_path, method: :delete,
+          type: 'button', class: 'btn btn-danger')

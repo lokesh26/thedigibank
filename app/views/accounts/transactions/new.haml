@@ -1,0 +1,15 @@
+.row.mt-4
+  .col-lg-6.offset-lg-3
+    - form_path = accounts_transactions_path(current_user.account)
+    = bootstrap_form_for @transaction, url: form_path do |f|
+      %fieldset
+        %legend New Transaction
+        .mb-3
+          %label.form-label{ for: 'account_number' }
+            Recepient Account Number
+          %input.form-control#annual-number{ name: 'annual_number',
+                                             value: params[:annual_number] }                 
+        = f.text_field :amount, required: true, label_class: 'required'
+
+      %p.text-center
+        = f.submit 'Send money', class: 'btn btn-success'
