@@ -1,0 +1,15 @@
+%table.table.table-striped
+  %tr
+    %th.span1 Receiver Account
+    %th.span1 Receiver Name
+    %th.span1 Amount
+    %th.span1 Date
+  - @sent_transactions.each do |tr|
+    %tr
+      %td= tr.receiver.account_number
+      %td= tr.receiver.user.name
+      %td= tr.amount
+      %td= tr.created_at.strftime('%m/%d/%Y %I:%M %p')
+
+= will_paginate @sent_transactions      
+
