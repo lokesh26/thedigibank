@@ -6,11 +6,9 @@ class PaymentBuilder
   end
 
   def create
-    ActiveRecord::Base.transaction do
-      debit_sender_account
-      credit_rceciever_account
-      create_transaction_log
-    end
+    debit_sender_account
+    credit_rceciever_account
+    create_transaction_log
   end
 
   private
