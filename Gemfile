@@ -16,6 +16,8 @@ gem 'bootstrap_form'
 gem 'haml'
 gem 'faker'
 gem 'draper'
+gem 'will_paginate', '~> 3.3'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password

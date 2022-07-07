@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_07_050109) do
+ActiveRecord::Schema.define(version: 2022_07_07_130209) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.decimal "balance", precision: 10
+    t.decimal "balance", precision: 10, scale: 2
     t.string "account_number"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2022_07_07_050109) do
   end
 
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.decimal "amount", precision: 10
+    t.decimal "amount", precision: 10, scale: 2
     t.string "transaction_uuid"
     t.bigint "sender_id", null: false
     t.bigint "receiver_id", null: false

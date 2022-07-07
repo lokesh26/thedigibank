@@ -10,6 +10,10 @@
 
   %body.app
     .container
-      = render partial: '/layouts/header'          
+      = render partial: '/layouts/header'
+      %p.notice
+        = notice
+      %p.alert
+        = alert                
       = yield
 

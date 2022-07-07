@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 	layout :choose_layout
 
   def set_current_account!
+    return unless user_signed_in?
     logger.debug { 'set_current_account!' }
     @account ||= current_user.account
   end  
