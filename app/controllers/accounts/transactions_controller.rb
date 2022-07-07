@@ -9,6 +9,7 @@ class Accounts::TransactionsController < ApplicationController
     return receiver_not_found unless payment_receiver.present?
     return insufficient_balance unless sufficient_balance.present?
     return sending_to_self if sender_same_as_receiver
+    return sending_negative_amount if amount_negative
 
     PaymentBuilder.new(payment_params).create
     flash[:notice] = 'Transaction successful'
@@ -44,6 +45,11 @@ class Accounts::TransactionsController < ApplicationController
     redirect_to new_accounts_transaction_path
   end  
 
+  def sending_negative_amount
+    flash[:alert] = "Amount can not be negative"
+    redirect_to new_accounts_transaction_path    
+  end
+
   def sender_same_as_receiver
     @account == payment_receiver
   end
@@ -56,6 +62,10 @@ class Accounts::TransactionsController < ApplicationController
     @receiver ||= Account.find_by(
       account_number: transaction_params[:account_number]
     )
+  end
+
+  def amount_negative
+    transaction_params[:transaction][:amount].to_d.negative?
   end
 
   def payment_params
