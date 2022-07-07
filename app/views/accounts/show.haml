@@ -3,5 +3,11 @@
 		= notice
 	%p.alert
 		= alert
-	
-	hey there!
+	.card
+		.card-header
+			Your account details
+		.card-body
+			%p.card-text
+				= "Account Number: #{@account.account_number}"
+			%p.card-text
+				= "Account Balance: #{@account.balance}€"
