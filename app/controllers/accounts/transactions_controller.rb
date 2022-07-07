@@ -6,8 +6,9 @@ class Accounts::TransactionsController < ApplicationController
   end
 
   def create
-    return redirect_to_new_transaction unless payment_receiver.present?
-    return redirect_to_new_transaction unless sufficient_balance.present?
+    return receiver_not_found unless payment_receiver.present?
+    return insufficient_balance unless sufficient_balance.present?
+    return sending_to_self if sender_same_as_receiver
 
     PaymentBuilder.new(payment_params).create
     flash[:notice] = 'Transaction successful'
@@ -17,18 +18,34 @@ class Accounts::TransactionsController < ApplicationController
   end
 
   def sent
-    @sent_transactions = @account.transactions.order("created_at DESC").paginate(page: params[:page], per_page: 5)   
+    @sent_transactions = @account.transactions.order("created_at DESC")
+                                 .paginate(page: params[:page], per_page: 5)   
   end
 
   def received
-    @received_transactions = @account.received_transactions.order("created_at DESC").paginate(page: params[:page], per_page: 5)
+    @received_transactions = @account.received_transactions.order("created_at DESC")
+                                     .paginate(page: params[:page], per_page: 5)
   end
 
   private
 
-  def redirect_to_new_transaction
-    flash[:alert] = "Receiver account not found or insufficient funds"
+  def receiver_not_found
+    flash[:alert] = "Receiver account not found"
+    redirect_to new_accounts_transaction_path    
+  end
+
+  def insufficient_balance
+    flash[:alert] = "Insufficient funds"
     redirect_to new_accounts_transaction_path
+  end
+
+  def sending_to_self
+    flash[:alert] = "Can not send to yourself"
+    redirect_to new_accounts_transaction_path
+  end  
+
+  def sender_same_as_receiver
+    @account == payment_receiver
   end
 
   def sufficient_balance
