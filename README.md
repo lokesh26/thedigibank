@@ -1,24 +1,87 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# TheDigiBank
 
-Things you may want to cover:
+## Table of Contents
 
-* Ruby version
+## Getting Started
 
-* System dependencies
+### Prerequisites
 
-* Configuration
+Before setting up the app locally, make sure you have the following:
 
-* Database creation
+1. Install Ruby version 2.5 or higher
 
-* Database initialization
+### Development Setup
 
-* How to run the test suite
+To setup the App locally, you will need to go through the following steps.
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Setup MySQL following the instructions
+	
+- `brew install mysql@5.7`
 
-* Deployment instructions
+- `brew postinstall` has run succesfully (you might need to clear `/usr/local/etc/my.cnf` and `rm -rf /usr/local/var/mysql`)
 
-* ...
+- `echo 'export PATH="/usr/local/opt/mysql@5.7/bin:\$PATH"' >> ~/.zshrc` (or equivalent depending on your bash)
+
+- Reload your terminal
+
+- Update the database.yml file with password	
+
+3. Do a bundle install.
+
+4. Create and migrate/seed the database
+
+```
+rails db:create
+rails db:migrate
+```
+
+5. Run the development server using `rails s`
+
+6. Create User and Account from Console. Use the schema.rb to get the required fields
+
+## Testing
+
+### Rspec
+
+Prepare test database
+```
+rails db:test:prepare
+```
+
+To run all specs
+```
+bundle exec rspec
+```
+
+To run all specs in one file
+```
+bundle exec rspec <path/to/spec/file>
+```
+
+To run one specific test
+```
+bundle exec rspec <path/to/spec/file>:<line number of test>
+```
+
+## Design
+
+### Transaction Safety
+
+- Devise for Authenticatio
+
+- Safe routing
+
+- Database validations and tests for safeguarding transactions
+
+- Controller checks
+
+### Future Extensions
+
+- Front end Validations
+
+- Controller Specs
+
+- More specs for Models
+
+
