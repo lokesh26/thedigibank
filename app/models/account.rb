@@ -7,4 +7,14 @@ class Account < ApplicationRecord
   validates :user_id, presence: true, uniqueness: true
   validates :account_number, presence: true, uniqueness:  { case_sensitive: true }
   validates :balance, presence: true, numericality: { greater_than_or_equal_to: 0 }  
+
+  def debit_account(amount)
+    new_balance = balance - BigDecimal(amount)
+    update balance: new_balance
+  end
+
+  def credit_account(amount)
+    new_balance = balance + BigDecimal(amount)
+    update balance: new_balance    
+  end
 end
