@@ -1,8 +1,6 @@
 
 # TheDigiBank
 
-## Table of Contents
-
 ## Getting Started
 
 ### Prerequisites
