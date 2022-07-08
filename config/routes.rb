@@ -8,4 +8,6 @@ Rails.application.routes.draw do
       get :received, on: :collection    
     end
   end
+
+  get '*path', to: 'accounts#unknown'
 end
