@@ -6,10 +6,11 @@ class Accounts::TransactionsController < ApplicationController
   end
 
   def create
+    return amount_not_valid unless amount_valid
+    return sending_negative_amount if amount_negative
     return receiver_not_found unless payment_receiver.present?
     return insufficient_balance unless sufficient_balance.present?
     return sending_to_self if sender_same_as_receiver
-    return sending_negative_amount if amount_negative
 
     PaymentBuilder.new(payment_params).create
     flash[:notice] = 'Transaction successful'
@@ -30,6 +31,11 @@ class Accounts::TransactionsController < ApplicationController
 
   private
 
+  def amount_not_valid
+    flash[:alert] = "Amount is not  a valid number"
+    redirect_to new_accounts_transaction_path 
+  end
+
   def receiver_not_found
     flash[:alert] = "Receiver account not found"
     redirect_to new_accounts_transaction_path    
@@ -48,6 +54,10 @@ class Accounts::TransactionsController < ApplicationController
   def sending_negative_amount
     flash[:alert] = "Amount can not be negative"
     redirect_to new_accounts_transaction_path    
+  end
+
+  def amount_valid
+    BigDecimal(transaction_params[:transaction][:amount], exception: false).present?
   end
 
   def sender_same_as_receiver

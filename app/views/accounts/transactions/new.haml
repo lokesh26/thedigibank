@@ -7,7 +7,8 @@
           %label.form-label{ for: 'account_number' }
             Recepient Account Number
           %input.form-control#account-number{ name: 'account_number',
-                                             value: params[:account_number] }                 
+                                             value: params[:account_number],
+                                             required: true }                 
         = f.text_field :amount, required: true, label_class: 'required'
 
       %p.text-center
