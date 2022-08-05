@@ -87,3 +87,23 @@ bundle exec rspec <path/to/spec/file>:<line number of test>
 - More specs for Models
 
 
+## Problem statement
+
+Introduction
+The key to the assignment is the method and technique. The user interface is less important. The test case can be performed from the comfort of your home. We would like to receive a notification of when you have completed the assignment. The project can be uploaded to your personal code repository (e.g. GitHub) and the URL to repository can be sent per email.
+Assignment - The Ruby Bank
+1. Build a simple Rails banking app
+2. Via the console you can create users with password
+3. Via the console you can give the user credit
+4. The user must be able to log in
+5. User has a bank account with balance
+6. Users can transfer money to each other through the UI
+7. Users may not have a negative balance on their account
+8. It must be traceable how a user obtained a certain balance
+Expectations
+• The project is structured in a logical way that allows future extensions in
+terms of functionality and maintainability
+• Make sure that money is transferred safely between accounts
+• Our Quality Assurance engineer should be able to understand the build-up
+of your application and know what and how you have tested already
+• Make use of appropriate code conventions as much as possible
